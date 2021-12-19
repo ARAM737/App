@@ -183,7 +183,7 @@
         },
         computed: {
           filteredId() {
-              return this.info.filter(value => value.city.includes(this.search));
+              return this.info.filter(value => value.city.toUpperCase().includes(this.search.toUpperCase()));
           }
         },
         methods: {
