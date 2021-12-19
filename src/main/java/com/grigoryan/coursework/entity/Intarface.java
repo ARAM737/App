@@ -11,8 +11,8 @@ import javax.persistence.*;
 public class Intarface {
 
     @Id
-    @Column(name = "id")
-    private Integer Id;
+    @Column(name = "id_intarface")
+    private Integer idIntarface;
 
     @Column(name = "layout")
     private String layout;
@@ -35,12 +35,12 @@ public class Intarface {
         this.botFunction = botFunction;
     }
 
-    public Integer getId() {
-        return Id;
+    public Integer getIdIntarface() {
+        return idIntarface;
     }
 
-    public void setId(Integer id) {
-        this.Id = id;
+    public void setIdIntarface(Integer idIntarface) {
+        this.idIntarface = idIntarface;
     }
 
     public String getLayout() {

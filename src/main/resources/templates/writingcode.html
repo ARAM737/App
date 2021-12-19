@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>Bot function</title>
+    <title>Writing code</title>
     <style>
         .row {
             margin-top: 20px;
@@ -44,18 +44,6 @@
             cursor: pointer;
         }
 
-        .collection-item {
-            display: flex;
-        }
-
-        .itemlist {
-            margin-right: 50px;
-        }
-
-        .itemlist:last-child {
-            margin-right: 0;
-        }
-
         @media screen and (max-width: 1000px) {
             .link {
                 font-size: 17px;
@@ -70,9 +58,9 @@
             <nav class="teal accent-4">
                 <div class="nav-wrapper center">
                     <div class="col s12">
-                        <a href="/" class="link active">Bot function</a>
+                        <a href="/" class="link">Bot function</a>
                         <a href="/intarfaces" class="link">Intarface</a>
-                        <a href="/writingCodes" class="link">Writing code</a>
+                        <a href="/writingCodes" class="link active">Writing code</a>
                         <a href="/checkResults" class="link">Check result</a>
                     </div>
                 </div>
@@ -80,47 +68,46 @@
             <div v-if="visible3">
                 <div class="row">
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="city ID" v-model="number">
+                        <input type="text" class="form-control" placeholder="dependencies Id" v-model="number">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Начальная команда" v-model="start">
+                        <input type="text" class="form-control" placeholder="writing function" v-model="start">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Город" v-model="ct">
+                        <input type="text" class="form-control" placeholder="import library" v-model="ct">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Температура" v-model="temp">
+                        <input type="text" class="form-control" placeholder="import weather data" v-model="temp">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Влажность" v-model="hum">
+                        <input type="text" class="form-control" placeholder="city id" v-model="hum">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Погода" v-model="weather">
+                        <input type="text" class="form-control" placeholder="intarface id" v-model="weather">
                     </div>
                 </div>
                 <button class="waves-effect waves-light btn" @click="add()"><i class="material-icons left">add_circle</i>Добавить новую запись</button>
-                <button class="waves-effect waves-light btn" @click="sortbtn()">Отсортировать по алфавиту</button>
             </div>
             <table v-if="visible">
                 <thead>
                 <tr>
-                    <th scope="col">city Id</th>
-                    <th scope="col">Начальная команда</th>
-                    <th scope="col">Город</th>
-                    <th scope="col">Температура</th>
-                    <th scope="col">Влажность</th>
-                    <th scope="col">Погода</th>
+                    <th scope="col">dependencies Id</th>
+                    <th scope="col">writing function</th>
+                    <th scope="col">import library</th>
+                    <th scope="col">import weather data</th>
+                    <th scope="col">city id</th>
+                    <th scope="col">intarface id</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="value in info">
-                    <th scope="row">{{ value.cityId }}</th>
-                    <td>{{ value.commandStart }}</td>
-                    <td>{{ value.city }}</td>
-                    <td>{{ value.temperature }}</td>
-                    <td>{{ value.humidity }}</td>
-                    <td>{{ value.main }}</td>
-                    <td>
+                    <th scope="row">{{ value.dependenciesId }}</th>
+                    <td>{{ value.writingFunction }}</td>
+                    <td>{{ value.importLibrary }}</td>
+                    <td>{{ value.importWeatherData }}</td>
+                    <td>{{ value.botFunction.cityId }}</td>
+                    <td>{{ value.intarface.idIntarface }}</td>
+                    <td style="cursor: pointer;">
                         <i class="material-icons update" @click="updateID(value)">border_color</i>
                     </td>
                     <td>
@@ -129,27 +116,15 @@
                 </tr>
                 </tbody>
             </table>
-            <input v-model="search" type="text" placeholder="Фильтр по городу" style="margin-top: 30px;">
-            <ul class="collection">
-                <li v-for="value in filteredId" :key="value.cityId" class="collection-item">
-                    <div class="itemlist">{{ value.city }}</div>
-                    <div class="itemlist">{{ value.temperature }}</div>
-                    <div class="itemlist">{{ value.humidity }}</div>
-                    <div class="itemlist">{{ value.main }}</div>
-                </li>
-            </ul>
             <div class="row" v-if="visible2">
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Город" v-model="ct">
+                    <input type="text" class="form-control" placeholder="writing function" v-model="start">
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Температура" v-model="temp">
+                    <input type="text" class="form-control" placeholder="import library" v-model="ct">
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Влажность" v-model="hum">
-                </div>
-                <div class="col">
-                    <input type="text" class="form-control" placeholder="Погода" v-model="weather">
+                    <input type="text" class="form-control" placeholder="import weather data" v-model="temp">
                 </div>
             </div>
             <div style="margin-top: 10px;" v-if="visible2">
@@ -167,29 +142,23 @@
             visible2: false,
             visible3: true,
             info: null,
-            number: '',
+            number: null,
             start: '',
             ct: '',
             temp: '',
             hum: '',
             weather: '',
-            search: '',
         },
         mounted () {
-            axios.get('http://localhost:4002/botFunction')
+            axios.get('http://localhost:4002/writingCode')
                 .then((response) => {
                     this.info = response.data;
                 });
         },
-        computed: {
-          filteredId() {
-              return this.info.filter(value => value.city.includes(this.search));
-          }
-        },
         methods: {
             deleteID(value) {
-                this.number = value.cityId;
-                axios.delete('http://localhost:4002/botFunction/' + this.number)
+                this.number = value.dependenciesId;
+                axios.delete('http://localhost:4002/writingCode/' + this.number)
                     .then((response) => {
                         window.location.reload();
                     }).catch((e) => {
@@ -197,31 +166,29 @@
                     alert('Ошибка');
                 });
             },
-            sortarr(x, y) {
-                return x.city.localeCompare(y.city);
-            },
-            sortbtn() {
-                var s = this.info.sort(this.sortarr);
-            },
             updateID(value) {
-                this.number = value.cityId;
-                this.start = value.commandStart;
-                this.ct = value.city;
-                this.temp = value.temperature;
-                this.hum = value.humidity;
-                this.weather = value.main;
+                this.number = value.dependenciesId;
+                this.start = value.writingFunction;
+                this.ct = value.importLibrary;
+                this.temp = value.importWeatherData;
+                this.hum = value.botFunction.cityId;
+                this.weather = value.intarface.idIntarface;
                 this.visible = false;
                 this.visible2 = true;
                 this.visible3 = false;
             },
             updateClient() {
-                axios.put('http://localhost:4002/botFunction/' + this.number, {
-                    'cityId': this.number,
-                    'commandStart': this.start,
-                    'city': this.ct,
-                    'temperature': this.temp,
-                    'humidity': this.hum,
-                    'main': this.weather
+                axios.put('http://localhost:4002/writingCode/' + this.number, {
+                    'dependenciesId': this.number,
+                    'writingFunction': this.start,
+                    'importLibrary': this.ct,
+                    'importWeatherData': this.temp,
+                    'botFunction': {
+                        'cityId': this.hum,
+                    },
+                    'intarface': {
+                        'idIntarface': this.weather,
+                    },
                 }).then((response) =>{
                     window.location.reload();
                 }).catch((e) => {
@@ -245,13 +212,17 @@
                 this.visible3 = true;
             },
             add() {
-                axios.post('http://localhost:4002/botFunction', {
-                    'cityId': this.number,
-                    'commandStart': this.start,
-                    'city': this.ct,
-                    'temperature': this.temp,
-                    'humidity': this.hum,
-                    'main': this.weather
+                axios.post('http://localhost:4002/writingCode', {
+                    'dependenciesId': this.number,
+                    'writingFunction': this.start,
+                    'importLibrary': this.ct,
+                    'importWeatherData': this.temp,
+                    'botFunction': {
+                        'cityId': this.hum,
+                    },
+                    'intarface': {
+                        'idIntarface': this.weather,
+                    },
                 }).then((response) => {
                     window.location.reload();
                 }).catch((e) => {

@@ -27,7 +27,7 @@ public class WritingCode {
     private BotFunction botFunction;
 
     @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "id_intarface", referencedColumnName = "id_intarface")
     private Intarface intarface;
 
     public BotFunction getBotFunction() {

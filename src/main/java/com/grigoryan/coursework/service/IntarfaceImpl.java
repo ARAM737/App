@@ -31,7 +31,7 @@ public class IntarfaceImpl implements IntarfaceService {
     @Override
     public boolean update(Intarface intarface, int id) {
         if(intarfaceRepository.existsById(id)) {
-            intarface.setId(id);
+            intarface.setIdIntarface(id);
             intarfaceRepository.save(intarface);
             return true;
         }

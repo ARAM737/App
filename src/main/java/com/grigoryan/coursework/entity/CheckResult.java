@@ -34,7 +34,7 @@ public class CheckResult {
     private BotFunction botFunction;
 
     @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "id_intarface", referencedColumnName = "id_intarface")
     private Intarface intarface;
 
     @OneToOne
