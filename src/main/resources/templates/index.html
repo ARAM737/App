@@ -197,7 +197,7 @@
                 return x.city.localeCompare(y.city);
             },
             sortbtn() {
-                var s = this.info.sort(this.sortarr);
+                this.info.sort(this.sortarr);
             },
             updateID(value) {
                 this.number = value.cityId;
